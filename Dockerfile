@@ -4,6 +4,7 @@ ENV ANTSPATH="/opt/ants-2.3.4/"
 ENV PATH="/opt/ants-2.3.4:$PATH"
 ENV TZ=America/Toronto
 
+
 # SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL required due to
 # some dependency listing "scikit-learn" as "sklearn" in its dependencies
 ENV SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
@@ -29,9 +30,10 @@ RUN apt-get install -y -q build-essential \
     apt-get -y install libblas-dev \
         liblapack-dev \
         gfortran \
-        libxrender1 \
+        libxrender1
 
-RUN software-properties-common && add-apt-repository ppa:deadsnakes/ppa
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get install -y python3.10 python3.10-dev python3.10-distutils python3.10-venv
 
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
@@ -46,7 +48,7 @@ RUN rm -rf /var/lib/apt/lists/* && \
 
 RUN cd /tractolearn && pip install -e .
 
-RUN pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 -f https://download.pytorch.org/whl/cu111/torch_stable.html
+RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 
 RUN pip install -U numpy==1.23.*
 
