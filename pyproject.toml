@@ -39,6 +39,9 @@ dependencies = [
     "nibabel == 4.0.0",
     # Git dependencies
     "scilpy @ git+https://github.com/scilus/scilpy@eb5d3fbe3cb2697a1ea90fe8ea88512e9686802b",
+    "tensorflow",
+    "ipykernel"
+    
 ]
 description = "Tractography learning"
 dynamic = ["version"]
